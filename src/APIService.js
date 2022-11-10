@@ -136,7 +136,7 @@ export default class APIService {
             const model = response.data;
             this.getObject(model.building).then((result) => {model.building = result});
             return model;
-        });
+        }).catch( err => console.log(err));
     }
 
     /**

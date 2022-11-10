@@ -13,6 +13,7 @@ export default function NavMenu(props) {
     return <Drawer
            anchor='left'
            open={props.open}
+           variant='temporary'
            onClose={() => {props.togglerCallback()}}
            >
            { props.loadingSuccess?
@@ -44,7 +45,7 @@ export default function NavMenu(props) {
                        }}
                    >
                        <Typography>Не удалось загрузить данные</Typography>
-                       <Button variant='text'>Обновить</Button>
+                       <Button variant='text' onClick={props.reload}>Обновить</Button>
                        {props.isLoading?
                            <CircularProgress />:<></>}
                    </Box>

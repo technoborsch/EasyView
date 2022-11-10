@@ -65,6 +65,7 @@ function App() {
                 api={api}
                 isLoading={isLoading}
                 loadingSuccess={loadingSuccess}
+                reload={reloadProjects}
                 auth={auth}
                 open={menuState}
                 togglerCallback={handleMenuToggle}
