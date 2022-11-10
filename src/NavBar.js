@@ -14,15 +14,24 @@ export default function NavBar(props) {
             position='static'
             >
              <Toolbar>
-                 {props.auth?
                  <IconButton
                      color='inherit'
                      onClick={()=>{
                          props.togglerCallback();
                      }}
+                     sx={props.auth? {}:{ //if authorized, nothing is applied
+                         visibility: {
+                             xs: 'hidden', //if not, make it hidden on small screens
+                             lg: 'visible'
+                         },
+                         display: {
+                             xs: 'inline',
+                             lg: 'none' //and remove on large screens
+                         }
+                     }}
                  >
-                     <MenuIcon />
-                 </IconButton> : <></>}
+                     <MenuIcon fontSize='large'/>
+                 </IconButton>
                  <Box
                      sx={{
                          flexGrow: 1,
@@ -31,15 +40,19 @@ export default function NavBar(props) {
                              xs: 'center',
                              lg: 'start'
                          },
+                         alignItems: 'center',
                          p: '8px'
                      }}
                  >
                      <VisibilityIcon
+                        fontSize='medium'
                         sx={{
                             marginX: '8px'
                         }}
                      />
-                     <Typography>
+                     <Typography
+                         variant='h6'
+                     >
                          EasyView
                      </Typography>
                  </Box>
@@ -49,7 +62,7 @@ export default function NavBar(props) {
                      aria-controls='menu-appbar'
                      onClick={props.handleAuth}
                  >
-                     {props.auth? <AccountCircle /> : <LoginIcon />}
+                     {props.auth? <AccountCircle fontSize='large'/> : <LoginIcon fontSize='large'/>}
                  </IconButton>
              </Toolbar>
            </AppBar>
