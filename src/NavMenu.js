@@ -14,6 +14,7 @@ export default function NavMenu(props) {
            anchor='left'
            open={props.open}
            variant='temporary'
+           keepMounted
            onClose={() => {props.togglerCallback()}}
            >
            { props.loadingSuccess?

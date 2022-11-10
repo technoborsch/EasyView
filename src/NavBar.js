@@ -4,13 +4,13 @@ import AppBar from '@mui/material/AppBar';
 import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from '@mui/icons-material/Menu';
-import VisibilityIcon from '@mui/icons-material/Visibility';
 import LoginIcon from '@mui/icons-material/Login';
 import {AccountCircle} from "@mui/icons-material";
 import {Typography} from "@mui/material";
 import Box from '@mui/material/Box';
 import {Menu} from "@mui/material";
 import {MenuItem} from "@mui/material";
+import VisibilityOutlinedIcon from '@mui/icons-material/VisibilityOutlined';
 
 export default function NavBar(props) {
 
@@ -56,8 +56,8 @@ export default function NavBar(props) {
                          p: '8px'
                      }}
                  >
-                     <VisibilityIcon
-                        fontSize='medium'
+                     <VisibilityOutlinedIcon
+                        fontSize='large'
                         sx={{
                             marginX: '8px'
                         }}
