@@ -93,7 +93,7 @@ export default function NavBar(props) {
                      open={Boolean(anchorEl)}
                      onClose={handleClose}
                  >
-                     <MenuItem>Настройки</MenuItem>
+                     <MenuItem>Профиль</MenuItem>
                      <MenuItem onClick={() => {handleClose(); props.handleAuth()}}>Выход</MenuItem>
                  </Menu>
              </Toolbar>

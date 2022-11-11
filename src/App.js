@@ -7,6 +7,7 @@ import NavMenu from "./NavMenu";
 import Scene from "./Scene";
 
 import APIService from "./APIService";
+import LoginForm from "./LoginForm";
 
 const apiUrl = 'https://easyview.myk8s.ru/api/v1'
 const api = new APIService(apiUrl);
@@ -71,7 +72,7 @@ function App() {
                 togglerCallback={handleMenuToggle}
                 projects={projects}
             />
-            <Scene />
+            {auth? <Scene /> : <LoginForm />}
 
         </CssBaseline>
   );
