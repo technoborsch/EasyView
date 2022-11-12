@@ -1,4 +1,5 @@
 import React, {useState} from "react";
+import {useSelector, useDispatch} from "react-redux";
 
 import AppBar from '@mui/material/AppBar';
 import Toolbar from "@mui/material/Toolbar";
@@ -12,7 +13,12 @@ import {Menu} from "@mui/material";
 import {MenuItem} from "@mui/material";
 import VisibilityOutlinedIcon from '@mui/icons-material/VisibilityOutlined';
 
+import {login, logout} from "./features/user/userSlice";
+
 export default function NavBar(props) {
+
+    const user = useSelector(state => state.user);
+    const dispatch = useDispatch();
 
     const[anchorEl, setAnchorEl] = useState(null);
     const handleMenu = (event) => {
@@ -22,16 +28,14 @@ export default function NavBar(props) {
         setAnchorEl(null);
     };
 
-    return <AppBar
-            position='static'
-            >
+    return <AppBar position='static'>
              <Toolbar>
                  <IconButton
                      color='inherit'
                      onClick={()=>{
                          props.togglerCallback();
                      }}
-                     sx={props.auth? {}:{ //if authorized, nothing is applied
+                     sx={user? {}:{ //if authorized, nothing is applied
                          visibility: {
                              xs: 'hidden', //if not, make it hidden on small screens
                              lg: 'visible'
@@ -72,9 +76,9 @@ export default function NavBar(props) {
                      size='large'
                      color='inherit'
                      aria-controls='menu-appbar'
-                     onClick={props.auth? handleMenu : props.handleAuth}
+                     onClick={user? handleMenu : () => {dispatch(login())}}
                  >
-                     {props.auth? <AccountCircle fontSize='large'/> : <LoginIcon fontSize='large'/>}
+                     {user? <AccountCircle fontSize='large'/> : <LoginIcon fontSize='large'/>}
                  </IconButton>
                  <Menu
                      sx={{
@@ -94,7 +98,7 @@ export default function NavBar(props) {
                      onClose={handleClose}
                  >
                      <MenuItem>Профиль</MenuItem>
-                     <MenuItem onClick={() => {handleClose(); props.handleAuth()}}>Выход</MenuItem>
+                     <MenuItem onClick={() => {handleClose(); dispatch(logout())}}>Выход</MenuItem>
                  </Menu>
              </Toolbar>
            </AppBar>

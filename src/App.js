@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from "react";
+import {useSelector} from "react-redux";
 
 import {CssBaseline} from "@mui/material";
 
@@ -14,15 +15,11 @@ const api = new APIService(apiUrl);
 
 function App() {
 
-    const[auth, setAuth] = useState(true);
-
-    const handleAuth = () => {
-        setAuth(!auth);
-    };
+    const user = useSelector(state => state.user);
 
     const[menuState, toggleMenu] = useState(false);
 
-        const handleMenuToggle = () => {
+    const handleMenuToggle = () => {
         toggleMenu(!menuState)
     };
 
@@ -58,8 +55,6 @@ function App() {
   return (
         <CssBaseline>
             <NavBar
-                auth={auth}
-                handleAuth={handleAuth}
                 togglerCallback={handleMenuToggle}
             />
             <NavMenu
@@ -67,12 +62,11 @@ function App() {
                 isLoading={isLoading}
                 loadingSuccess={loadingSuccess}
                 reload={reloadProjects}
-                auth={auth}
                 open={menuState}
                 togglerCallback={handleMenuToggle}
                 projects={projects}
             />
-            {auth? <Scene /> : <LoginForm />}
+            {user? <Scene /> : <LoginForm />}
 
         </CssBaseline>
   );
