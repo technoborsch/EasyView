@@ -2,13 +2,17 @@ import Drawer from '@mui/material/Drawer';
 import Box from '@mui/material/Box';
 import List from '@mui/material/List';
 import {Container} from "@mui/material";
-import {CircularProgress} from "@mui/material";
-import Button from '@mui/material/Button';
+//import {CircularProgress} from "@mui/material";
+//import Button from '@mui/material/Button';
 import {Typography} from "@mui/material";
 
 import CollapsibleMenuItem from "./CollapsibleMenuItem";
 
+import {useGetProjectListQuery} from "./services/apiservice";
+
 export default function NavMenu(props) {
+
+    const {data, error, isLoading} = useGetProjectListQuery();
 
     return <Drawer
            anchor='left'
@@ -17,19 +21,18 @@ export default function NavMenu(props) {
            keepMounted
            onClose={() => {props.togglerCallback()}}
            >
-           { props.loadingSuccess?
+           { data?
                <Box sx={{width: 250}} key={'drawerBox'}>
                    <List>
-                       {props.projects.map((project) => (
+                       {data.map((project) => (
                            <CollapsibleMenuItem
-                               api={props.api}
                                key={project.name}
-                               text={project.name}
-                               itemsList={project.buildings}
+                               project={project}
                            />
                            ))}
                    </List>
-               </Box> :
+               </Box>
+               : error?
                <Container
                    sx={{
                        display: 'flex',
@@ -46,10 +49,9 @@ export default function NavMenu(props) {
                        }}
                    >
                        <Typography>Не удалось загрузить данные</Typography>
-                       <Button variant='text' onClick={props.reload}>Обновить</Button>
-                       {props.isLoading?
-                           <CircularProgress />:<></>}
                    </Box>
-               </Container> }
+               </Container>
+                   : isLoading? <></>
+                   : <></>}
            </Drawer>
 }
