@@ -3,11 +3,11 @@ import {useSelector} from "react-redux";
 
 import {CssBaseline} from "@mui/material";
 
-import NavBar from "./NavBar";
-import NavMenu from "./NavMenu";
-import Scene from "./Scene";
+import NavBar from "./components/NavBar";
+import NavMenu from "./components/NavMenu";
+import Scene from "./components/Scene";
 
-import LoginForm from "./LoginForm";
+import LoginForm from "./components/LoginForm";
 
 function App() {
 

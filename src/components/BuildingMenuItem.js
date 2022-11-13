@@ -3,7 +3,7 @@ import {Divider, ListItemButton, ListItemIcon, ListItemText, Typography} from "@
 import StarBorder from "@mui/icons-material/StarBorder";
 import React from "react";
 
-import {useGetObjectByURLQuery} from "./services/apiservice";
+import {useGetObjectByURLQuery} from "../services/apiservice";
 
 export default function BuildingMenuItem(props) {
 

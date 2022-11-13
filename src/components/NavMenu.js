@@ -8,7 +8,7 @@ import {Typography} from "@mui/material";
 
 import CollapsibleMenuItem from "./CollapsibleMenuItem";
 
-import {useGetProjectListQuery} from "./services/apiservice";
+import {useGetProjectListQuery} from "../services/apiservice";
 
 export default function NavMenu(props) {
 

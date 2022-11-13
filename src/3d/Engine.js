@@ -7,7 +7,7 @@ import {RoomEnvironment} from "three/addons/environments/RoomEnvironment";
 import SpriteText from 'three-spritetext';
 
 import ControlPanel from "./ControlPanel.js";
-import {prettify} from "./Utils";
+import {prettify} from "../utils/Utils";
 
 /**
  * A graphical engine that works on THREE.js library.
