@@ -28,6 +28,7 @@ export default function CollapsibleMenuItem(props) {
                     <ListItemButton
                         key={props.project.name}
                         onClick={handleToggle}
+                        disabled={props.project.buildings.length === 0}
                     >
                         <ListItemIcon>
                             <CottageIcon />
@@ -40,7 +41,6 @@ export default function CollapsibleMenuItem(props) {
                 <Collapse
                     in={isOpen}
                     timeout="auto"
-                    unmountOnExit
                 >
                     <List component="div" disablePadding>
                         {props.project.buildings.map((building) => (
