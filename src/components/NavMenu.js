@@ -2,13 +2,11 @@ import Drawer from '@mui/material/Drawer';
 import Box from '@mui/material/Box';
 import List from '@mui/material/List';
 import {Container} from "@mui/material";
-//import {CircularProgress} from "@mui/material";
-//import Button from '@mui/material/Button';
 import {Typography} from "@mui/material";
 
 import CollapsibleMenuItem from "./CollapsibleMenuItem";
 
-import {useGetProjectListQuery} from "./services/apiservice";
+import {useGetProjectListQuery} from "../services/apiservice";
 
 export default function NavMenu(props) {
 

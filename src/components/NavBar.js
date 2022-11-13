@@ -13,7 +13,7 @@ import {Menu} from "@mui/material";
 import {MenuItem} from "@mui/material";
 import VisibilityOutlinedIcon from '@mui/icons-material/VisibilityOutlined';
 
-import {login, logout} from "./features/user/userSlice";
+import {login, logout} from "../features/user/userSlice";
 
 export default function NavBar(props) {
 
