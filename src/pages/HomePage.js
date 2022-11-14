@@ -1,9 +1,9 @@
 import {Box, Container, Typography} from "@mui/material";
-import {useSelector} from "react-redux";
+import {useAuth} from '../hooks/useAuth'
 
 export default function HomePage() {
 
-    const user = useSelector(state => state.user);
+    const user = useAuth();
 
     return <Container
         sx={{

@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import {useSelector, useDispatch} from "react-redux";
+import {useDispatch} from "react-redux";
 
 import AppBar from '@mui/material/AppBar';
 import Toolbar from "@mui/material/Toolbar";
@@ -13,11 +13,12 @@ import {Menu} from "@mui/material";
 import {MenuItem} from "@mui/material";
 import VisibilityOutlinedIcon from '@mui/icons-material/VisibilityOutlined';
 
-import {login, logout} from "../features/user/userSlice";
+import {setCredentials, logout} from "../features/auth/authSlice";
+import {useAuth} from "../hooks/useAuth";
 
 export default function NavBar(props) {
 
-    const user = useSelector(state => state.user);
+    const user = useAuth();
     const dispatch = useDispatch();
 
     const[anchorEl, setAnchorEl] = useState(null);
@@ -72,34 +73,39 @@ export default function NavBar(props) {
                          EasyView
                      </Typography>
                  </Box>
-                 <IconButton
-                     size='large'
-                     color='inherit'
-                     aria-controls='menu-appbar'
-                     onClick={user? handleMenu : () => {dispatch(login())}}
-                 >
-                     {user? <AccountCircle fontSize='large'/> : <LoginIcon fontSize='large'/>}
-                 </IconButton>
-                 <Menu
-                     sx={{
-                         mt: '45px'
-                     }}
-                     anchorEl={anchorEl}
-                     anchorOrigin={{
-                         vertical: 'top',
-                         horizontal: 'right'
-                     }}
-                     keepMounted
-                     transformOrigin={{
-                         vertical: 'top',
-                         horizontal: 'right'
-                     }}
-                     open={Boolean(anchorEl)}
-                     onClose={handleClose}
-                 >
-                     <MenuItem>Профиль</MenuItem>
-                     <MenuItem onClick={() => {handleClose(); dispatch(logout())}}>Выход</MenuItem>
-                 </Menu>
+                 <Box sx={props.forLoginPage? { //hide this whole group if it is on login page
+                                visibility: 'hidden',
+                            } : {}
+                 }>
+                     <IconButton
+                         size='large'
+                         color='inherit'
+                         aria-controls='menu-appbar'
+                         onClick={user? handleMenu : () => {dispatch(setCredentials({user: {name: 'Ivan', lastname: 'Ivanov'}, token: {text: 'retuheiutyi'}}))}}
+                     >
+                         {user? <AccountCircle fontSize='large'/> : <LoginIcon fontSize='large'/>}
+                     </IconButton>
+                     <Menu
+                         sx={{
+                             mt: '45px'
+                         }}
+                         anchorEl={anchorEl}
+                         anchorOrigin={{
+                             vertical: 'top',
+                             horizontal: 'right'
+                         }}
+                         keepMounted
+                         transformOrigin={{
+                             vertical: 'top',
+                             horizontal: 'right'
+                         }}
+                         open={Boolean(anchorEl)}
+                         onClose={handleClose}
+                     >
+                         <MenuItem>Профиль</MenuItem>
+                         <MenuItem onClick={() => {handleClose(); dispatch(logout())}}>Выход</MenuItem>
+                     </Menu>
+                 </Box>
              </Toolbar>
            </AppBar>
 }

@@ -214,7 +214,7 @@ export default class Engine {
     }
 
     /**
-     * Method used to catch intersection position via ray casting. It catches click of a user and returns first
+     * Method used to catch intersection position via ray casting. It catches click of a auth and returns first
      * intersection, taking into consideration current clipping.
      *
      * @param { Object } event Generated click event.

@@ -1,11 +1,10 @@
 import React, {useState} from "react";
 import {CssBaseline} from "@mui/material";
 import NavBar from "../components/NavBar";
-import NavMenu from "../components/NavMenu";
 
-import {PrivateOutlet} from "../utils/PrivateOutlet";
+import LoginForm from "../components/LoginForm";
 
-export default function Layout() {
+export default function LoginPage() {
 
     const[menuState, toggleMenu] = useState(false);
 
@@ -14,13 +13,10 @@ export default function Layout() {
   return (
         <CssBaseline>
             <NavBar
+                forLoginPage={true}
                 togglerCallback={handleMenuToggle}
             />
-            <NavMenu
-                open={menuState}
-                togglerCallback={handleMenuToggle}
-            />
-            <PrivateOutlet/>
+            <LoginForm />
         </CssBaseline>
   );
 }

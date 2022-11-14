@@ -4,7 +4,7 @@ GUI.TEXT_CLOSED = 'Закрыть панель управления';
 GUI.TEXT_OPEN = 'Открыть панель управления';
 
 /**
- * Class with GUI that allows user to manipulate loaded model - sectioning, elements hiding and so on.
+ * Class with GUI that allows auth to manipulate loaded model - sectioning, elements hiding and so on.
  */
 export default class ControlPanel {
     /**

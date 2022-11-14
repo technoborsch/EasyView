@@ -1,15 +1,15 @@
 import {Routes, Route} from "react-router-dom";
 
 import Layout from "./pages/Layout";
-import HomePage from "./components/HomePage";
-import LoginForm from "./components/LoginForm";
+import HomePage from "./pages/HomePage";
+import LoginPage from "./pages/LoginPage";
 
 function App() {
     return <Routes>
         <Route path='/' element={<Layout />}>
             <Route index element={<HomePage />} />
-            <Route path='login' element={<LoginForm />} />
         </Route>
+        <Route path='login' element={<LoginPage />} />
     </Routes>
 }
 
