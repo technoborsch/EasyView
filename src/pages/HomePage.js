@@ -5,6 +5,7 @@ import {isAuthValid} from "../utils/Utils";
 export default function HomePage() {
 
     const auth = useAuth();
+    const logged = isAuthValid(auth);
 
     return <Container
         sx={{
@@ -28,7 +29,7 @@ export default function HomePage() {
                     marginBottom:'10px'
                 }}
             >
-                Домашняя страница для {isAuthValid(auth)? '' : 'не'}авторизованных пользователей
+                Домашняя страница для {logged? '' : 'не'}авторизованных пользователей
             </Typography>
         </Box>
     </Container>

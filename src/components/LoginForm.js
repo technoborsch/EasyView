@@ -1,4 +1,4 @@
-import {Box, Button, Container, styled, TextField, Typography} from "@mui/material";
+import {Button, Card, Container, styled, TextField, Typography} from "@mui/material";
 import {VisibilityOutlined} from "@mui/icons-material";
 import React, {useState} from "react";
 import {useNavigate} from "react-router-dom";
@@ -42,13 +42,15 @@ export default function LoginForm() {
     return <Container
         sx={{
             display: 'flex',
-            alignItems: 'center',
+            alignItems: 'start',
             justifyContent: 'center',
             height: '100%'
         }}
     >
-        <Box
+        <Card
+            variant='outlined'
             sx={{
+                p: '30px',
                 display: 'flex',
                 flexFlow: 'column',
                 alignItems: 'center',
@@ -59,10 +61,8 @@ export default function LoginForm() {
                 fontSize='large'
             />
             <Typography
-                variant='h6'
-                sx={{
-                    marginBottom:'10px'
-                }}
+                variant='h5'
+                sx={{margin:'5px'}}
             >
                 Вход
             </Typography>
@@ -81,9 +81,10 @@ export default function LoginForm() {
                 id="passwordInput"
                 value={credentials.passwordInput}
                 onChange={onChange}
+                sx={{margin:'20px'}}
             />
-
             <Button
+                variant='outlined'
                 size='large'
                 color='inherit'
                 aria-controls='menu-appbar'
@@ -99,6 +100,6 @@ export default function LoginForm() {
             >
                 Войти
             </Button>
-        </Box>
+        </Card>
     </Container>
 }
