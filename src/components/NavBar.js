@@ -13,13 +13,17 @@ import {Menu} from "@mui/material";
 import {MenuItem} from "@mui/material";
 import VisibilityOutlinedIcon from '@mui/icons-material/VisibilityOutlined';
 
-import {setCredentials, logout} from "../features/auth/authSlice";
+import {logout} from "../features/auth/authSlice";
 import {useAuth} from "../hooks/useAuth";
+import {isAuthValid} from "../utils/Utils";
+import {useNavigate} from "react-router-dom";
 
 export default function NavBar(props) {
 
-    const user = useAuth();
+    const auth = useAuth();
+    const logged = isAuthValid(auth);
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const[anchorEl, setAnchorEl] = useState(null);
     const handleMenu = (event) => {
@@ -36,7 +40,7 @@ export default function NavBar(props) {
                      onClick={()=>{
                          props.togglerCallback();
                      }}
-                     sx={user? {}:{ //if authorized, nothing is applied
+                     sx={logged? {}:{ //if authorized, nothing is applied
                          visibility: {
                              xs: 'hidden', //if not, make it hidden on small screens
                              lg: 'visible'
@@ -81,9 +85,9 @@ export default function NavBar(props) {
                          size='large'
                          color='inherit'
                          aria-controls='menu-appbar'
-                         onClick={user? handleMenu : () => {dispatch(setCredentials({user: {name: 'Ivan', lastname: 'Ivanov'}, token: {text: 'retuheiutyi'}}))}}
+                         onClick={logged? handleMenu : () => {navigate('/login')}}
                      >
-                         {user? <AccountCircle fontSize='large'/> : <LoginIcon fontSize='large'/>}
+                         {logged? <AccountCircle fontSize='large'/> : <LoginIcon fontSize='large'/>}
                      </IconButton>
                      <Menu
                          sx={{

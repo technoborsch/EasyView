@@ -1,13 +1,12 @@
 import {Box, Button, Container, styled, TextField, Typography} from "@mui/material";
 import {VisibilityOutlined} from "@mui/icons-material";
-import {setCredentials} from "../features/auth/authSlice";
-import React from "react";
-import {useDispatch} from "react-redux";
+import React, {useState} from "react";
 import {useNavigate} from "react-router-dom";
+import {useLoginMutation} from "../services/apiservice";
+import {useDispatch} from "react-redux";
+import {setCredentials} from "../features/auth/authSlice";
 
-export default function LoginForm() {
-
-    const ValidationTextField = styled(TextField)({
+const ValidationTextField = styled(TextField)({
       '& input:valid + fieldset': {
         borderColor: 'green',
         borderWidth: 2,
@@ -22,11 +21,23 @@ export default function LoginForm() {
       },
     });
 
+export default function LoginForm() {
+
+    const [login] = useLoginMutation();
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const performLogin = () => {
-        dispatch(setCredentials({user: {name: 'Ivan', lastname: 'Ivanov'}, token: {text: 'retuheiutyi'}}));
-    };
+
+    const[credentials, handleChange] = useState({loginInput: '', passwordInput: ''});
+
+    const onChange = (e) => {
+        handleChange((prev) => (
+            {
+                ...prev,
+                [e.target.id]: e.target.value
+            }
+            )
+        );
+    }
 
     return <Container
         sx={{
@@ -59,15 +70,34 @@ export default function LoginForm() {
                 label="Логин"
                 required
                 variant="outlined"
-                id="login-input"
+                id="loginInput"
+                value={credentials.loginInput}
+                onChange={onChange}
             />
+            <ValidationTextField
+                label="Пароль"
+                required
+                variant="outlined"
+                id="passwordInput"
+                value={credentials.passwordInput}
+                onChange={onChange}
+            />
+
             <Button
                 size='large'
                 color='inherit'
                 aria-controls='menu-appbar'
-                onClick={() => {performLogin(); navigate('/');}}
+                onClick={async () => {
+                    try {
+                        const response = await login(credentials);
+                        dispatch(setCredentials(response.data));
+                        navigate('/');
+                    } catch (err) {
+                        console.log(err);
+                    }
+                }}
             >
-                Вход
+                Войти
             </Button>
         </Box>
     </Container>

@@ -1,9 +1,10 @@
 import {Box, Container, Typography} from "@mui/material";
 import {useAuth} from '../hooks/useAuth'
+import {isAuthValid} from "../utils/Utils";
 
 export default function HomePage() {
 
-    const user = useAuth();
+    const auth = useAuth();
 
     return <Container
         sx={{
@@ -27,7 +28,7 @@ export default function HomePage() {
                     marginBottom:'10px'
                 }}
             >
-                Домашняя страница для {user? '' : 'не'}авторизованных пользователей
+                Домашняя страница для {isAuthValid(auth)? '' : 'не'}авторизованных пользователей
             </Typography>
         </Box>
     </Container>

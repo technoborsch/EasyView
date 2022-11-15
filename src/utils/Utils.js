@@ -46,3 +46,13 @@ export function truncate(text, length) {
     }
     return text;
 }
+
+export function isAuthValid(auth) {
+    return !!(auth.token && Date.parse(auth.expire) > Date.now());
+}
+
+export function makeUrlHttps(url) {
+    if (url[4] === ':') {
+        return url.replace('http', 'https')
+    }
+}
